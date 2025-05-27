@@ -104,6 +104,7 @@ Login_work:async function(req,res){
         msg:"Login successfully",
         user_record,
         user:{
+            i:find_user_email._id,
             n:find_user_email.user_name,
             e:find_user_email.email
         }

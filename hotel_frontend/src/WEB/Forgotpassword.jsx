@@ -8,7 +8,7 @@ export default function Forgotpassword() {
 
     async function fp(){
         try {
-            await axios.post(`http://localhost:4000/eproject/exb_forgot`,{
+            await axios.post(`http://localhost:3007/`,{
                 email :email
             }).then((a)=>{
                 toast.success(a.data.msg)

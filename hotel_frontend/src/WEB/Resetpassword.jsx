@@ -21,7 +21,7 @@ let nav = useNavigate();
         }
 
         try {
-            const response = await axios.post(`http://localhost:4000/eproject/exb_resetpswd/${token}`, { password: pswd });
+            const response = await axios.post(`http://localhost:3007/${token}`, { password: pswd });
             toast.success(response.data.msg || "Password reset successful");
             setPswd("");
             setCpswd("");

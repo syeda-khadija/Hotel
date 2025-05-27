@@ -42,7 +42,7 @@ export default function Booking() {
       });
       setMessage('✅ Booking successful!');
     } catch (err) {
-      setMessage('❌ Booking failed. Please check the input.');
+      setMessage(err.response.data.msg);
     }
   };
 

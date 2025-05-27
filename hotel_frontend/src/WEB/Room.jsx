@@ -6,9 +6,16 @@ import { Link } from 'react-router-dom';
 
 export default function Room() {
   const [rooms, setRooms] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 🔐 Login status
 
   useEffect(() => {
     fetchRooms();
+
+    // 🔐 Check login status
+    const storedUser = JSON.parse(localStorage.getItem('User_Data'));
+    if (storedUser && storedUser._id) {
+      setIsLoggedIn(true);
+    }
   }, []);
 
   const fetchRooms = async () => {
@@ -44,14 +51,18 @@ export default function Room() {
                     <p><strong>Room No:</strong> {room.room_number}</p>
                     <p><strong>Price:</strong> Rs. {room.price}</p>
                     <p><strong>Status:</strong> {room.is_available ? 'Available' : 'Not Available'}</p>
-                    {room.is_available ? (
-                    <Link to="/book"  state={{room}} className="mt-auto">
-                  <button className="btn btn-danger w-100">Book Now</button>
-              </Link>
-                   
+
+                    {room.is_available && isLoggedIn ? (
+                      <Link to="/book" state={{ room }} className="mt-auto">
+                        <button className="btn btn-danger w-100">Book Now</button>
+                      </Link>
                     ) : (
                       <button className="btn btn-secondary w-100 mt-auto" disabled>
-                     {room.is_available ? 'Book Now' : 'Not Available'}
+                        {room.is_available
+                          ? isLoggedIn
+                            ? 'Book Now'
+                            : 'Login to Book'
+                          : 'Not Available'}
                       </button>
                     )}
                   </div>

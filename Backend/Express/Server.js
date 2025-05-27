@@ -11,7 +11,7 @@ const app = express();
 const roomRouter = require("./Routing/Roomrouter"); // adjust the path if needed
 const bodyParser = require('body-parser');
 const staff = require('./Routing/Staffroute'); //replace with your actual model file
-
+const bookingRoutes = require('./Routing/Bookingroute');
 
 app.use(express.json());
 
@@ -24,6 +24,7 @@ app.use(cors());
 app.use("/Web/", r);
 app.use("/room/", room_route);
 app.use("/staff/",staff )
+app.use('/booking', bookingRoutes);
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json());
 

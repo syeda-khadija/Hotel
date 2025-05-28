@@ -20,4 +20,5 @@ router.post("/reset",func.reset_password)
 
 
 
+
 module.exports=router;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Footer from './Footer'
-import Navbar from './Navbar'
+import Navbar from '../Component/Navbar'
 
 export default function About() {
   return (

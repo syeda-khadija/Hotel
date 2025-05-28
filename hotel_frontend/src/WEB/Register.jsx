@@ -43,7 +43,7 @@ export default function Register() {
           Gender,
           Address,
         });
-        toast.success('Registration successful!');
+        toast.success('🎉 Registration successful!');
         clearForm();
       }
     } catch (error) {
@@ -55,46 +55,60 @@ export default function Register() {
       }
     }
   }
-   
+
   return (
-    <div className="container mt-4">
-      <div className="card shadow p-4">
-        <h3 className="text-danger mb-3">User Registration</h3>
-        <div className="row">
-          <div className="col-md-6 mb-3">
-            <label>Full Name</label>
+    <div className="container py-5">
+      <div
+        className="card border-0 shadow-lg p-4 mx-auto"
+        style={{
+          maxWidth: '700px',
+          background: 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(10px)',
+          borderRadius: '15px',
+        }}
+      >
+        <h3 className="text-center mb-4 text-danger fw-bold">
+          <i className="bi bi-pencil-square me-2"></i> User Registration
+        </h3>
+
+        <div className="row g-3">
+          <div className="col-md-6">
+            <label className="form-label text-secondary">👤 Full Name</label>
             <input
               type="text"
-              className="form-control"
+              className="form-control bg-light"
               value={Name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your name"
             />
           </div>
-          <div className="col-md-6 mb-3">
-            <label>Email</label>
+
+          <div className="col-md-6">
+            <label className="form-label text-secondary">📧 Email</label>
             <input
               type="email"
-              className="form-control"
+              className="form-control bg-light"
               value={Email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
             />
           </div>
-          <div className="col-md-6 mb-3">
-            <label>Age</label>
+
+          <div className="col-md-6">
+            <label className="form-label text-secondary">🎂 Age</label>
             <input
               type="number"
-              className="form-control"
+              className="form-control bg-light"
               value={Age}
               onChange={(e) => setAge(e.target.value)}
               placeholder="Enter your age"
             />
           </div>
-          <div className="col-md-6 mb-3">
-            <label>Gender</label>
+
+          <div className="col-md-6">
+            <label className="form-label text-secondary">⚧️ Gender</label>
             <select
-              className="form-select"
+              className="form-select bg-light"
               value={Gender}
               onChange={(e) => setGender(e.target.value)}
             >
@@ -104,34 +118,58 @@ export default function Register() {
               <option value="Other">Other</option>
             </select>
           </div>
-          <div className="col-md-12 mb-3">
-            <label>Address</label>
+
+          <div className="col-12">
+            <label className="form-label text-secondary">🏠 Address</label>
             <input
               type="text"
-              className="form-control"
+              className="form-control bg-light"
               value={Address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="Enter your address"
             />
           </div>
-          <div className="col-md-12 mb-4">
-            <label>Password</label>
+
+          <div className="col-12">
+            <label className="form-label text-secondary">🔒 Password</label>
             <input
               type="password"
-              className="form-control"
+              className="form-control bg-light"
               value={Pass}
               onChange={(e) => setPass(e.target.value)}
               placeholder="Enter your password"
             />
           </div>
-          <div className="col-md-12">
-            <button className="btn btn-danger w-100" onClick={save_data}>
-              Register Me
+
+          <div className="col-12">
+            <button
+              className="btn w-100 text-white fw-bold"
+              onClick={save_data}
+              style={{
+                background: 'linear-gradient(to right, #ff0000, #000000)',
+                padding: '12px',
+                fontSize: '1.1rem',
+                border: 'none',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.03)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 0, 0, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <i className="bi bi-check2-circle me-2"></i> Register Me
             </button>
           </div>
         </div>
-        <div className="mt-3 text-center">
-          <Link to="/login">Already have an account? Login</Link>
+
+        <div className="mt-4 text-center">
+          <Link to="/login" className="text-decoration-none">
+            Already have an account? Login
+          </Link>
         </div>
       </div>
       <ToastContainer />

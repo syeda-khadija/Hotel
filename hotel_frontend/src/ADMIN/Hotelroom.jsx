@@ -4,7 +4,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 
-// Helper function to get floor prefix
 function getFloorPrefix(floorName) {
   switch (floorName) {
     case 'Ground': return 'G';
@@ -25,8 +24,7 @@ export default function Hotelroom() {
   const [floor, setFloor] = useState('');
   const [price, setPrice] = useState(10000);
   const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(null); // NEW
-  
+  const [preview, setPreview] = useState(null);
 
   function clearForm() {
     setRtype('');
@@ -84,149 +82,129 @@ export default function Hotelroom() {
   return (
     <div>
       <Adminnavbar />
-      <div className="card shadow p-4">
-        <h3 className="text-primary mb-3">Add Room</h3>
-        <div className="row">
+      <div className="container py-5">
+        <div
+          className="card border-0 shadow-lg p-4 mx-auto"
+          style={{
+            maxWidth: '900px',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '15px',
+          }}
+        >
+          <h3 className="text-center mb-4 fw-bold text-gradient">
+            <i className="bi bi-door-closed-fill me-2"></i>Add New Room
+          </h3>
 
-          {/* Room Type */}
-          <div className="col-md-6 mb-3">
-            <label>Room Type</label>
-            <select
-              className="form-control"
-              value={roomtype}
-              onChange={(e) => setRtype(e.target.value)}
-            >
-              <option value="">Select room type</option>
-              <option value="Single">Single</option>
-              <option value="Double">Double</option>
-              <option value="Suite">Suite</option>
-              <option value="Deluxe">Deluxe</option>
-            </select>
-          </div>
+          <div className="row g-3">
+            <div className="col-md-6">
+              <label className="form-label text-secondary">🛏️ Room Type</label>
+              <select className="form-control" value={roomtype} onChange={(e) => setRtype(e.target.value)}>
+                <option value="">Select room type</option>
+                <option value="Single">Single</option>
+                <option value="Double">Double</option>
+                <option value="Suite">Suite</option>
+                <option value="Deluxe">Deluxe</option>
+              </select>
+            </div>
 
-          {/* Description */}
-          <div className="col-md-6 mb-3">
-            <label>Description</label>
-            <input
-              type="text"
-              className="form-control"
-              value={description}
-              onChange={(e) => setDes(e.target.value)}
-              placeholder="Enter description"
-            />
-          </div>
+            <div className="col-md-6">
+              <label className="form-label text-secondary">📝 Description</label>
+              <input type="text" className="form-control" value={description} onChange={(e) => setDes(e.target.value)} placeholder="Enter description" />
+            </div>
 
-          {/* Floor */}
-          <div className="col-md-6 mb-3">
-            <label>Floor</label>
-            <select
-              className="form-control"
-              value={floor}
-              onChange={(e) => {
-                const selectedFloor = e.target.value;
-                setFloor(selectedFloor);
-                const prefix = getFloorPrefix(selectedFloor);
-                if (!room_no || !room_no.startsWith(prefix)) {
-                  setRoom_no(prefix);
-                }
-              }}
-            >
-              <option value="">Select floor</option>
-              <option value="Ground">Ground</option>
-              <option value="1st">1st</option>
-              <option value="2nd">2nd</option>
-              <option value="3rd">3rd</option>
-              <option value="4th">4th</option>
-            </select>
-          </div>
+            <div className="col-md-6">
+              <label className="form-label text-secondary">🏢 Floor</label>
+              <select
+                className="form-control"
+                value={floor}
+                onChange={(e) => {
+                  const selectedFloor = e.target.value;
+                  setFloor(selectedFloor);
+                  const prefix = getFloorPrefix(selectedFloor);
+                  if (!room_no || !room_no.startsWith(prefix)) {
+                    setRoom_no(prefix);
+                  }
+                }}
+              >
+                <option value="">Select floor</option>
+                <option value="Ground">Ground</option>
+                <option value="1st">1st</option>
+                <option value="2nd">2nd</option>
+                <option value="3rd">3rd</option>
+                <option value="4th">4th</option>
+              </select>
+            </div>
 
-          {/* Room Number */}
-          <div className="col-md-6 mb-3">
-            <label>Room Number</label>
-            <input
-              type="text"
-              className="form-control"
-              value={room_no}
-              onChange={(e) => setRoom_no(e.target.value)}
-              placeholder="Enter room number"
-            />
-          </div>
+            <div className="col-md-6">
+              <label className="form-label text-secondary">🔢 Room Number</label>
+              <input type="text" className="form-control" value={room_no} onChange={(e) => setRoom_no(e.target.value)} placeholder="Enter room number" />
+            </div>
 
-          {/* Number of Beds */}
-          <div className="col-md-6 mb-3">
-            <label>No. of Beds (1-5)</label>
-            <input
-              type="number"
-              className="form-control"
-              min="1"
-              max="5"
-              value={no_bed}
-              onChange={(e) => setNo_bed(Number(e.target.value))}
-              placeholder="Enter number of beds"
-            />
-          </div>
+            <div className="col-md-6">
+              <label className="form-label text-secondary">🛏️ No. of Beds (1-5)</label>
+              <input type="number" className="form-control" min="1" max="5" value={no_bed} onChange={(e) => setNo_bed(Number(e.target.value))} />
+            </div>
 
-          {/* Availability */}
-          <div className="col-md-6 mb-3">
-            <label>Is Available</label>
-            <select
-              className="form-control"
-              value={is_available}
-              onChange={(e) => setIs_available(e.target.value)}
-            >
-              <option value="">Select availability</option>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
+            <div className="col-md-6">
+              <label className="form-label text-secondary">✅ Availability</label>
+              <select className="form-control" value={is_available} onChange={(e) => setIs_available(e.target.value)}>
+                <option value="">Select availability</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
 
-          {/* Price */}
-          <div className="col-md-6 mb-3">
-            <label>Price (min 10000)</label>
-            <input
-              type="number"
-              className="form-control"
-              min="10000"
-              value={price}
-              onChange={(e) => setPrice(Number(e.target.value))}
-              placeholder="Enter price"
-            />
-          </div>
+            <div className="col-md-6">
+              <label className="form-label text-secondary">💵 Price (min ₹10000)</label>
+              <input type="number" className="form-control" min="10000" value={price} onChange={(e) => setPrice(Number(e.target.value))} />
+            </div>
 
-          {/* Room Image */}
-          <div className="col-md-6 mb-4">
-  <label>Room Image</label>
-  <input
-    type="file"
-    className="form-control"
-    onChange={(e) => {
-      const file = e.target.files[0];
-      setImage(file);
-      setPreview(file ? URL.createObjectURL(file) : null);
-    }}
-  />
-  {preview && (
-    <div className="mt-3">
-      <label>Image Preview:</label>
-      <img
-        src={preview}
-        alt="Room Preview"
-        className="img-fluid rounded"
-        style={{ maxHeight: '200px' }}
-      />
-    </div>
-  )}
-</div>
+            <div className="col-md-6">
+              <label className="form-label text-secondary">🖼️ Room Image</label>
+              <input
+                type="file"
+                className="form-control"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setImage(file);
+                  setPreview(file ? URL.createObjectURL(file) : null);
+                }}
+              />
+              {preview && (
+                <div className="mt-3">
+                  <img src={preview} alt="Preview" className="img-fluid rounded" style={{ maxHeight: '200px' }} />
+                </div>
+              )}
+            </div>
 
-          {/* Submit Button */}
-          <div className="col-md-12">
-            <button className="btn btn-primary w-100" onClick={addroom}>
-              Add Room
-            </button>
+            <div className="col-12">
+              <button
+                className="btn w-100 text-white fw-bold"
+                onClick={addroom}
+                style={{
+                  background: 'linear-gradient(to right, #ff0000, #000000)',
+                  padding: '12px',
+                  fontSize: '1.1rem',
+                  border: 'none',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.03)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 0, 0, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <i className="bi bi-plus-circle me-2"></i>Add Room
+              </button>
+            </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
     </div>
   );
 }

@@ -3,9 +3,9 @@ const Room = require('../Models/Room');
 
 exports.createBooking = async (req, res) => {
   try {
-    const { user, room, arrival, departure, no_of_person } = req.body;
+    const { guest, room, arrival, departure, no_of_person } = req.body;
 
-    if (!user || !room || !arrival || !departure || !no_of_person) {
+    if (!guest || !room || !arrival || !departure || !no_of_person) {
       return res.status(400).json({ msg: 'All fields are required.' });
     }
 
@@ -18,7 +18,7 @@ exports.createBooking = async (req, res) => {
       return res.status(400).json({ msg: 'Room is not available.' });
     }
 
-    const booking = new Booking({ user, room, arrival, departure, no_of_person });
+    const booking = new Booking({ guest, room, arrival, departure, no_of_person });
     await booking.save();
 
     // Optionally, mark room as unavailable
@@ -28,6 +28,6 @@ exports.createBooking = async (req, res) => {
     res.status(201).json({ msg: 'Booking successful.', booking });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: 'Server error.' });
+    res.status(500).json({ msg: err.message });
   }
 };

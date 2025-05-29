@@ -13,7 +13,7 @@ export default function Room() {
 
     // 🔐 Check login status
     const storedUser = JSON.parse(localStorage.getItem('User_Data'));
-    if (storedUser && storedUser._id) {
+    if (storedUser && storedUser.i) {
       setIsLoggedIn(true);
     }
   }, []);

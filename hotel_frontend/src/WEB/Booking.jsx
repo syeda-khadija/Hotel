@@ -13,6 +13,8 @@ export default function Booking() {
   const formatDate = (date) => date.toISOString().split('T')[0];
 
   const [userId, setUserId] = useState('');
+  const [username, setUsername] = useState('');
+
   const [roomId, setRoomId] = useState(roomData?._id || '');
   const [arrival, setArrival] = useState(formatDate(today));
   const [departure, setDeparture] = useState(formatDate(tomorrow));
@@ -20,9 +22,14 @@ export default function Booking() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    setUserId('user123');
-  }, []);
+ useEffect(() => {
+  const storedUser = JSON.parse(localStorage.getItem('User_Data')); // Assuming user object is stored
+  if (storedUser?.i) {
+    setUserId(storedUser.i);
+    setUsername(storedUser.n) // This should be a valid ObjectId like '66573f96b987d1ef73ae43c1'
+  }
+}, []);
+
 
   const handleArrivalChange = (e) => {
     const newArrival = e.target.value;
@@ -42,7 +49,7 @@ export default function Booking() {
 
     try {
       await axios.post('http://localhost:3007/booking/create', {
-        user: userId,
+        guest: userId,
         room: roomId,
         arrival,
         departure,
@@ -92,7 +99,7 @@ export default function Booking() {
           <div className="row g-3">
             <div className="col-md-6">
               <label className="form-label text-secondary">👤 User ID</label>
-              <input type="text" className="form-control bg-light" value={userId} readOnly />
+              <input type="text" className="form-control bg-light" value={username} readOnly />
             </div>
 
             <div className="col-md-6">

@@ -19,6 +19,10 @@ let booking = mongoose.Schema({
     type: Date,
     required: true
   },
+   no_of_person: {
+    type: Number,
+    required: true
+  },
   created_at: {
     type: Date,
     default: Date.now

@@ -37,6 +37,7 @@ export default function Adminnavbar() {
         <li><Link to="/sstaff" style={linkStyle("/admin/sstaff")}>Showstaff </Link></li>
         <li><Link to="/sbook" style={linkStyle("/admin/sstaff")}>Showbooking </Link></li>
         <li><Link to="/sfeed" style={linkStyle("/admin/sfeed")}>ShowFeedback</Link></li>
+         <li><Link to="/about" style={linkStyle("/admin/about")}>About </Link></li>
       </ul>
 
       <Link to="/login">

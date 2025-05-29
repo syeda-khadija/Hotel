@@ -14,6 +14,7 @@ const staff = require('./Routing/Staffroute'); //replace with your actual model 
 const bookingRoutes = require('./Routing/Bookingroute');
 let eedback= require('./Routing/Feedbackroute');
 const feedbackRoutes = require('./Routing/Feedbackroute');
+const aboutRoutes = require('./Routing/Aboutroute');
 
 app.use(express.json());
 
@@ -28,6 +29,7 @@ app.use("/room/", room_route);
 app.use("/staff/",staff )
 app.use('/booking', bookingRoutes);
 app.use('/', feedbackRoutes);
+app.use(aboutRoutes);
 
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json());

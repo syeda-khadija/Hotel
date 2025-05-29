@@ -20,6 +20,7 @@ import Resetpassword from './WEB/Resetpassword';
 import Logout from './WEB/Logout';
 import Feedback from './Component/Feedback';
 import ShowFeedback from './ADMIN/Showfeedback';
+import AboutUsForm from './ADMIN/Aboutusform';
 
 function App() {
   
@@ -58,6 +59,7 @@ function App() {
             <Route path='/sstaff' element={<Showstaff/>} />
             <Route path='/sbook' element={<ShowBookings/>} />
             <Route path='/sfeed' element={<ShowFeedback/>} />
+            <Route path='/about' element={<AboutUsForm/>}/>
 
 
           

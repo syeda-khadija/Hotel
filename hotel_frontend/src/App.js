@@ -19,6 +19,7 @@ import ShowBookings from './ADMIN/Showbooking';
 import Resetpassword from './WEB/Resetpassword';
 import Logout from './WEB/Logout';
 import Feedback from './Component/Feedback';
+import ShowFeedback from './ADMIN/Showfeedback';
 
 function App() {
   
@@ -56,6 +57,7 @@ function App() {
             <Route path='/staff' element={<Staff/>} />
             <Route path='/sstaff' element={<Showstaff/>} />
             <Route path='/sbook' element={<ShowBookings/>} />
+            <Route path='/sfeed' element={<ShowFeedback/>} />
 
 
           

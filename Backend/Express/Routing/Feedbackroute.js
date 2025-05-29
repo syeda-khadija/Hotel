@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { submitFeedback } = require('../Controllers/Fedback');
+const { submitFeedback, getAllFeedback } = require('../Controllers/Fedback');
 
-// POST /feedback
+// POST route to submit feedback
 router.post('/feedback', submitFeedback);
+
+// ✅ NEW: GET route to fetch all feedback
+router.get('/feedback/all', getAllFeedback);
 
 module.exports = router;

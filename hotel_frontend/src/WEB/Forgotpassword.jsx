@@ -8,7 +8,7 @@ export default function Forgotpassword() {
 
   async function fp() {
     try {
-      const res = await axios.post(`http://localhost:3007/forgot_pswd`, {
+      const res = await axios.post(`http://localhost:3007/Web/forgot`, {
         email: email,
       });
       toast.success(res.data.msg);

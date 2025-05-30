@@ -15,6 +15,9 @@ const bookingRoutes = require('./Routing/Bookingroute');
 let eedback= require('./Routing/Feedbackroute');
 const feedbackRoutes = require('./Routing/Feedbackroute');
 const aboutRoutes = require('./Routing/Aboutroute');
+const path = require('path');
+
+
 
 app.use(express.json());
 
@@ -29,7 +32,8 @@ app.use("/room/", room_route);
 app.use("/staff/",staff )
 app.use('/booking', bookingRoutes);
 app.use('/', feedbackRoutes);
-app.use(aboutRoutes);
+app.use('/about/', aboutRoutes);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json());

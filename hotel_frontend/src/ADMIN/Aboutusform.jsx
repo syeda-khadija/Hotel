@@ -9,26 +9,43 @@ export default function AboutUs() {
     heading: '',
     description: '',
     mission: '',
-    vision: ''
+    vision: '',
   });
+
+  const [picture, setPicture] = useState(null); // image file
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (e) => {
+    setPicture(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { heading, description, mission, vision } = formData;
 
-    if (!heading || !description || !mission || !vision) {
-      toast.error('All fields are required!');
+    const { heading, description, mission, vision } = formData;
+    if (!heading || !description || !mission || !vision || !picture) {
+      toast.error('All fields including picture are required!');
       return;
     }
 
+    const form = new FormData();
+    form.append('heading', heading);
+    form.append('description', description);
+    form.append('mission', mission);
+    form.append('vision', vision);
+    form.append('picture', picture);
+
     try {
-      await axios.post('http://localhost:3007/about', formData);
+      await axios.post('http://localhost:3007/about', form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
       toast.success('About Us details submitted successfully!');
       setFormData({ heading: '', description: '', mission: '', vision: '' });
+      setPicture(null);
     } catch (err) {
       console.error(err);
       toast.error('Submission failed. Please try again.');
@@ -52,7 +69,7 @@ export default function AboutUs() {
             <i className="bi bi-building me-2"></i>About Us Form
           </h3>
 
-          <form onSubmit={handleSubmit} className="row g-3">
+          <form onSubmit={handleSubmit} className="row g-3" encType="multipart/form-data">
             <div className="col-12">
               <label className="form-label text-secondary">📝 Heading</label>
               <input
@@ -103,6 +120,17 @@ export default function AboutUs() {
                 placeholder="Enter vision statement"
                 required
               ></textarea>
+            </div>
+
+            <div className="col-12">
+              <label className="form-label text-secondary">🖼️ Upload Picture</label>
+              <input
+                type="file"
+                accept="image/*"
+                className="form-control"
+                onChange={handleFileChange}
+                required
+              />
             </div>
 
             <div className="col-12">

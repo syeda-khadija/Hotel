@@ -16,7 +16,7 @@ router.put("/user/:id",func.update_record)
 router.post("/login",func.Login_work)
 router.post("/forgot",func.forgot_pswd)
 router.post("/login",func.Login_work)
-router.post("/reset",func.reset_password)
+router.post("/reset/:token",func.reset_password)
 
 
 

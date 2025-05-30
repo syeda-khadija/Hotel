@@ -21,6 +21,7 @@ import Logout from './WEB/Logout';
 import Feedback from './Component/Feedback';
 import ShowFeedback from './ADMIN/Showfeedback';
 import AboutUsForm from './ADMIN/Aboutusform';
+import ShowAbout from './ADMIN/Showabout';
 
 function App() {
   
@@ -60,7 +61,7 @@ function App() {
             <Route path='/sbook' element={<ShowBookings/>} />
             <Route path='/sfeed' element={<ShowFeedback/>} />
             <Route path='/about' element={<AboutUsForm/>}/>
-
+            <Route path='/sabout' element={<ShowAbout/>}/>
 
           
         </Routes>

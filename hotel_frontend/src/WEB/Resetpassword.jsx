@@ -22,7 +22,7 @@ export default function Resetpassword() {
     }
 
     try {
-      const response = await axios.post(`http://localhost:3007/reset_password${token}`, { password: pswd });
+      const response = await axios.post(`http://localhost:3007/Web/reset/${token}`, { password: pswd });
       toast.success(response.data.msg || "Password reset successful");
       setPswd("");
       setCpswd("");

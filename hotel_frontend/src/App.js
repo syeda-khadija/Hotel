@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import { BrowserRouter, Routes,Route } from 'react-router-dom';
 import Home from './Component/Home';
-import About from './WEB/About';
+import About from './Component/About';
 import Register from './WEB/Register';
 import Showdata from './ADMIN/Showdata';
 import Login from './WEB/Login';

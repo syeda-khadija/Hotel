@@ -56,105 +56,161 @@ export default function Booking() {
   };
 
   return (
-    <div className="container my-5">
-      <div
-        className="row shadow-lg rounded overflow-hidden"
-        style={{ minHeight: "550px" }}
-      >
-        {/* Left: Room Details */}
-        <div
-          className="col-lg-6 d-flex flex-column justify-content-center"
+    <div
+      className="container my-5"
+      style={{
+        background:
+          "linear-gradient(135deg, #f8fafc 0%, #e1e5f2 100%)",
+        borderRadius: "12px",
+        padding: "30px",
+        boxShadow:
+          "0 8px 30px rgba(0,0,0,0.12)",
+      }}
+    >
+      <div className="row g-0 rounded overflow-hidden shadow-sm">
+        {/* Left Panel */}
+        <aside
+          className="col-lg-6 d-flex flex-column justify-content-center px-5"
           style={{
-            backgroundImage:
-              'url("https://assets.minorhotels.com/image/upload/q_auto,f_auto,c_limit,w_1045/media/minor/anantara/images/anantara-jewel-bagh-jaipur-hotel/mhg/01_hotel-teaser/anantara_jewel-bagh_jaipur_hotel_teaser_01_880x620.jpg")',
+            backgroundImage: `url("https://assets.minorhotels.com/image/upload/q_auto,f_auto,c_limit,w_1045/media/minor/anantara/images/anantara-jewel-bagh-jaipur-hotel/mhg/01_hotel-teaser/anantara_jewel-bagh_jaipur_hotel_teaser_01_880x620.jpg")`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            color: "#fff",
-            padding: "40px 30px",
+            minHeight: "560px",
+            color: "white",
             position: "relative",
+            borderRadius: "12px 0 0 12px",
           }}
         >
           <div
             style={{
-              background: "rgba(255, 255, 255, 0.1)",
-              borderRadius: "20px",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-              padding: "30px",
-              boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
-              color: "#fff",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(to bottom right, rgba(0,0,0,0.6), rgba(0,0,0,0.3))",
+              borderRadius: "12px 0 0 12px",
+            }}
+          />
+          <div
+            style={{
+              position: "relative",
+              zIndex: 2,
+              paddingTop: "40px",
             }}
           >
-            <h2 className="mb-4 fw-bold text-center">
-              <i className="bi bi-door-open-fill me-2"></i>Room Information
+            <h2
+              className="mb-4 fw-bold"
+              style={{ letterSpacing: "1.5px", fontSize: "2.3rem", color:"white"}}
+            >
+              Room Details
             </h2>
-
             {roomData ? (
-              <div className="fs-5" style={{ lineHeight: "2", fontWeight: "500" }}>
-                <p>
-                  <i className="bi bi-tag-fill me-2 text-warning"></i>
+              <ul
+                className="list-unstyled fs-5"
+                style={{ lineHeight: "2.4", fontWeight: "600" }}
+              >
+                <li>
                   <strong>Type:</strong> {roomData.room_type}
-                </p>
-                <p>
-                  <i className="bi bi-hash me-2 text-info"></i>
-                  <strong>Room No:</strong> {roomData.room_number}
-                </p>
-                <p>
-                  <i className="bi bi-cash-stack me-2 text-success"></i>
-                  <strong>Price:</strong> ₹{roomData.price}
-                </p>
-                <p>
-                  <i className="bi bi-check-circle-fill me-2 text-light"></i>
+                </li>
+                <li>
+                  <strong>Room Number:</strong> {roomData.room_number}
+                </li>
+                <li>
+                  <strong>Price:</strong>{" "}
+                  <span style={{ color: "#ff6b6b", fontWeight: "700" }}>
+                    Pkr{roomData.price}
+                  </span>
+                </li>
+                <li>
                   <strong>Status:</strong>{" "}
                   <span
                     className={`badge px-3 py-2 fs-6 ${
                       roomData.is_available ? "bg-success" : "bg-danger"
                     }`}
-                    style={{ borderRadius: "12px" }}
+                    style={{
+                      borderRadius: "14px",
+                      fontWeight: "600",
+                      letterSpacing: "0.8px",
+                      textTransform: "uppercase",
+                    }}
                   >
                     {roomData.is_available ? "Available" : "Not Available"}
                   </span>
-                </p>
-              </div>
+                </li>
+              </ul>
             ) : (
-              <p className="text-center">No room data available.</p>
+              <p>No room data available.</p>
             )}
           </div>
-        </div>
+        </aside>
 
-        {/* Right: Booking Form */}
-        <div
+        {/* Right Panel - Booking Form */}
+        <section
           className="col-lg-6 bg-white p-5 d-flex flex-column justify-content-center"
-          style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}
+          style={{ borderRadius: "0 12px 12px 0" }}
         >
           <h3
-            className="text-center mb-4 fw-bold"
-            style={{ color: "#d32f2f", letterSpacing: "1.1px" }}
+            className="text-center mb-5 fw-bold"
+            style={{
+              color: "#d32f2f",
+              letterSpacing: "1.2px",
+              fontSize: "2rem",
+            }}
           >
             <i className="bi bi-calendar-check-fill me-2"></i>Book Your Stay
           </h3>
 
-          <form onSubmit={handleSubmit} noValidate>
-            {[{ label: "👤 User ID", value: userId, id: "userId" },
-              { label: "🏠 Room ID", value: roomId, id: "roomId" }
-            ].map(({ label, value, id }) => (
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+            style={{ maxWidth: "450px", margin: "0 auto" }}
+          >
+            {[
+              {
+                label: "👤 User ID",
+                value: userId,
+                readOnly: true,
+                type: "text",
+                id: "userId",
+              },
+              {
+                label: "🏠 Room ID",
+                value: roomId,
+                readOnly: true,
+                type: "text",
+                id: "roomId",
+              },
+            ].map(({ label, value, readOnly, type, id }) => (
               <div className="mb-4" key={id}>
-                <label className="form-label text-secondary" htmlFor={id}>
+                <label
+                  className="form-label text-secondary fw-semibold"
+                  htmlFor={id}
+                  style={{ fontSize: "1rem" }}
+                >
                   {label}
                 </label>
                 <input
                   id={id}
-                  type="text"
+                  type={type}
                   className="form-control bg-light"
                   value={value}
-                  readOnly
+                  readOnly={readOnly}
+                  style={{
+                    borderRadius: "10px",
+                    border: "1.8px solid #ddd",
+                    padding: "12px 14px",
+                    fontSize: "1rem",
+                    transition: "border-color 0.3s ease",
+                  }}
                 />
               </div>
             ))}
 
             <div className="mb-4">
-              <label className="form-label text-secondary" htmlFor="arrivalDate">
+              <label
+                className="form-label text-secondary fw-semibold"
+                htmlFor="arrivalDate"
+                style={{ fontSize: "1rem" }}
+              >
                 📅 Arrival Date
               </label>
               <input
@@ -165,11 +221,27 @@ export default function Booking() {
                 min={formatDate(today)}
                 onChange={handleArrivalChange}
                 required
+                style={{
+                  borderRadius: "10px",
+                  border: "1.8px solid #ddd",
+                  padding: "12px 14px",
+                  fontSize: "1rem",
+                  cursor: "pointer",
+                  transition: "border-color 0.3s ease",
+                }}
+                onFocus={(e) =>
+                  (e.currentTarget.style.borderColor = "#d32f2f")
+                }
+                onBlur={(e) => (e.currentTarget.style.borderColor = "#ddd")}
               />
             </div>
 
             <div className="mb-4">
-              <label className="form-label text-secondary" htmlFor="departureDate">
+              <label
+                className="form-label text-secondary fw-semibold"
+                htmlFor="departureDate"
+                style={{ fontSize: "1rem" }}
+              >
                 📆 Departure Date
               </label>
               <input
@@ -180,11 +252,27 @@ export default function Booking() {
                 min={arrival}
                 onChange={(e) => setDeparture(e.target.value)}
                 required
+                style={{
+                  borderRadius: "10px",
+                  border: "1.8px solid #ddd",
+                  padding: "12px 14px",
+                  fontSize: "1rem",
+                  cursor: "pointer",
+                  transition: "border-color 0.3s ease",
+                }}
+                onFocus={(e) =>
+                  (e.currentTarget.style.borderColor = "#d32f2f")
+                }
+                onBlur={(e) => (e.currentTarget.style.borderColor = "#ddd")}
               />
             </div>
 
-            <div className="mb-4">
-              <label className="form-label text-secondary" htmlFor="noOfPerson">
+            <div className="mb-5">
+              <label
+                className="form-label text-secondary fw-semibold"
+                htmlFor="noOfPerson"
+                style={{ fontSize: "1rem" }}
+              >
                 🧍 No. of Persons
               </label>
               <input
@@ -195,6 +283,17 @@ export default function Booking() {
                 min="1"
                 onChange={(e) => setNoOfPerson(e.target.value)}
                 required
+                style={{
+                  borderRadius: "10px",
+                  border: "1.8px solid #ddd",
+                  padding: "12px 14px",
+                  fontSize: "1rem",
+                  transition: "border-color 0.3s ease",
+                }}
+                onFocus={(e) =>
+                  (e.currentTarget.style.borderColor = "#d32f2f")
+                }
+                onBlur={(e) => (e.currentTarget.style.borderColor = "#ddd")}
               />
             </div>
 
@@ -202,21 +301,24 @@ export default function Booking() {
               type="submit"
               className="btn w-100 text-white fw-bold"
               style={{
-                background: "linear-gradient(to right, #d32f2f, #880e4f)",
-                padding: "14px",
-                fontSize: "1.15rem",
-                borderRadius: "10px",
+                background:
+                  "linear-gradient(90deg, #d32f2f 0%, #880e4f 100%)",
+                padding: "15px",
+                fontSize: "1.2rem",
+                borderRadius: "12px",
                 border: "none",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                boxShadow: "0 4px 10px rgba(211, 47, 47, 0.6)",
+                boxShadow: "0 6px 18px rgba(211, 47, 47, 0.7)",
+                transition:
+                  "transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.05)";
-                e.currentTarget.style.boxShadow = "0 6px 15px rgba(211, 47, 47, 0.8)";
+                e.currentTarget.style.transform = "scale(1.07)";
+                e.currentTarget.style.boxShadow =
+                  "0 10px 25px rgba(211, 47, 47, 0.85)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow = "0 4px 10px rgba(211, 47, 47, 0.6)";
+                e.currentTarget.style.boxShadow = "0 6px 18px rgba(211, 47, 47, 0.7)";
               }}
             >
               <i className="bi bi-check2-circle me-2"></i>Confirm Booking
@@ -225,8 +327,9 @@ export default function Booking() {
 
           {message && (
             <div
-              className="alert alert-success mt-4 text-center shadow-sm fw-semibold"
+              className="alert alert-success mt-5 text-center shadow-sm fw-semibold"
               role="alert"
+              style={{ fontSize: "1.1rem" }}
             >
               {message}
             </div>
@@ -234,14 +337,16 @@ export default function Booking() {
 
           {error && (
             <div
-              className="alert alert-danger mt-4 text-center shadow-sm fw-semibold"
+              className="alert alert-danger mt-5 text-center shadow-sm fw-semibold"
               role="alert"
+              style={{ fontSize: "1.1rem" }}
             >
               {error}
             </div>
           )}
-        </div>
+        </section>
       </div>
     </div>
   );
 }
+

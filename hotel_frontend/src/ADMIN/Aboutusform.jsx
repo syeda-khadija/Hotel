@@ -12,7 +12,7 @@ export default function AboutUs() {
     vision: '',
   });
 
-  const [picture, setPicture] = useState(null); // image file
+  const [picture, setPicture] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,10 +55,14 @@ export default function AboutUs() {
   return (
     <div>
       <Adminnavbar />
-      <div className="container py-5">
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ minHeight: '100vh', background: '#f8f9fa' }}
+      >
         <div
-          className="card border-0 shadow-lg p-4 mx-auto"
+          className="card border-0 shadow-lg p-4"
           style={{
+            width: '100%',
             maxWidth: '900px',
             background: 'rgba(255, 255, 255, 0.85)',
             backdropFilter: 'blur(10px)',

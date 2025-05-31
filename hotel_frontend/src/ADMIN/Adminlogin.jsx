@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
@@ -8,7 +8,7 @@ export default function Login() {
   const [Email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const nav = useNavigate();
- 
+
   async function Login_form() {
     if (!Email || !pass) {
       toast.error("Email and Password are required");
@@ -25,7 +25,7 @@ export default function Login() {
       localStorage.setItem("User_Data", JSON.stringify(res.data.user));
       setEmail('');
       setPass('');
-      setTimeout(() => nav("/"), 1000);
+      setTimeout(() => nav("/adminnav"), 1000);
     } catch (error) {
       toast.error(error?.response?.data?.msg || "Invalid login or server error");
       console.error(error);
@@ -44,7 +44,7 @@ export default function Login() {
         }}
       >
         <h3 className="text-center mb-4 text-danger fw-bold">
-          <i className="bi bi-person-circle me-2"></i> User Login
+          <i className="bi bi-person-circle me-2"></i> Admin Login
         </h3>
 
         <div className="mb-3">
@@ -91,10 +91,7 @@ export default function Login() {
           <i className="bi bi-box-arrow-in-right me-2"></i>Login
         </button>
 
-        <div className="mt-4 text-center">
-          <Link to="/reg" className="text-decoration-none me-4">📝 Don't have an account?</Link>
-          <Link to="/fp" className="text-decoration-none">❓ Forgot Password?</Link>
-        </div>
+       
       </div>
 
       <ToastContainer />

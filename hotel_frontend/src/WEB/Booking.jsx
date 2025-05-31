@@ -19,10 +19,18 @@ export default function Booking() {
   const [noOfPerson, setNoOfPerson] = useState(1);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setUserId("user123"); // Replace with actual user logic
+    const userString = localStorage.getItem("User_Data");
+    if (userString) {
+      let data = JSON.parse(userString);
+      setUserId(data.i);
+      setUser(data.n)
+      console.log(userId)
+    }
   }, []);
+
 
   const handleArrivalChange = (e) => {
     const newArrival = e.target.value;
@@ -42,7 +50,7 @@ export default function Booking() {
 
     try {
       await axios.post("http://localhost:3007/booking/create", {
-        user: userId,
+        User: userId,
         room: roomId,
         arrival,
         departure,
@@ -167,7 +175,7 @@ export default function Booking() {
             {[
               {
                 label: "👤 User ID",
-                value: userId,
+                value: user,
                 readOnly: true,
                 type: "text",
                 id: "userId",

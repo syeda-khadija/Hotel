@@ -85,7 +85,9 @@ export default function Showstaff() {
 {staff_data.length === 0 ? (
 <div className="alert alert-danger">No staff data found.</div>
 ) : (
+  <div className="container " style={{ marginLeft: '120px' }}>
 <div className="table-responsive">
+  <h1>Show Staff</h1>
 <table className="table table-bordered table-striped">
   <thead className="table-dark">
     <tr>
@@ -143,6 +145,7 @@ export default function Showstaff() {
     ))}
   </tbody>
 </table>
+</div>
 </div>
 )}
 

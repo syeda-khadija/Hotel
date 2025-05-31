@@ -80,6 +80,9 @@ export default function Showdata() {
 {user_data.length === 0 ? (
   <div className="alert alert-danger">No user data found.</div>
 ) : (
+
+  <div className="container " style={{ marginLeft: '120px' }}>
+    <h1>User Data</h1>
   <div className="table-responsive">
     <table className="table table-bordered table-striped">
       <thead className="table-dark">
@@ -122,6 +125,7 @@ export default function Showdata() {
         ))}
       </tbody>
     </table>
+  </div>
   </div>
 )}
 

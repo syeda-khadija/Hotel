@@ -21,61 +21,45 @@ export default function ShowFeedback() {
   }
 
   return (
-    <div style={{ backgroundColor: '#f9fafb', minHeight: '100vh' }}>
+    <div>
       <Adminnavbar />
       <ToastContainer position="top-right" />
 
-      <div className="container py-5 d-flex justify-content-center">
-        <div
-          className="card shadow p-4"
-          style={{
-            maxWidth: '900px',
-            width: '100%',
-            background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(12px)',
-            borderRadius: '15px',
-            border: '1px solid #ddd',
-          }}
-        >
-          <h3 className="text-center text-danger fw-bold mb-4">
-            <i className="bi bi-chat-left-text-fill me-2"></i> User Feedback
-          </h3>
+      <div style={{ backgroundColor: '#f8f9fa', paddingTop: '30px', minHeight: '100vh' }}>
+        <div className="w-100 px-4" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          
+          {/* Heading */}
+        
+            
+         
+
+          <hr />
 
           {feedbacks.length === 0 ? (
-            <div className="alert alert-secondary text-center">
-              <i className="bi bi-info-circle-fill me-2"></i>No feedback available yet.
-            </div>
+            <div className="alert alert-danger text-center">No feedback available.</div>
           ) : (
-            <div className="table-responsive">
-              <table className="table table-hover align-middle" style={{ borderCollapse: 'separate', borderSpacing: '0 10px' }}>
-                <thead>
-                  <tr style={{ background: 'linear-gradient(to right, #ff0000, #000000)', color: '#fff', borderRadius: '10px' }}>
-                    <th className="text-center py-3" style={{ borderTopLeftRadius: '10px' }}>👤 Name</th>
-                    <th className="text-center py-3">📧 Email</th>
-                    <th className="text-center py-3" style={{ borderTopRightRadius: '10px' }}>📝 Feedback</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {feedbacks.map((f) => (
-                    <tr
-                      key={f._id}
-                      style={{
-                        backgroundColor: '#fff',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-                        borderRadius: '10px',
-                        marginBottom: '12px',
-                        transition: 'transform 0.2s ease',
-                      }}
-                      onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.02)'}
-                      onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                    >
-                      <td className="text-center py-3">{f.name}</td>
-                      <td className="text-center py-3 text-primary">{f.email}</td>
-                      <td className="py-3">{f.feedback}</td>
+            <div className="container" style={{ marginLeft: '120px' }}>
+              <h1 > Show User Feedback</h1>
+              <div className="table-responsive">
+                <table className="table table-bordered table-striped">
+                  <thead className="table-dark">
+                    <tr>
+                      <th>👤 Name</th>
+                      <th>📧 Email</th>
+                      <th>📝 Feedback</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {feedbacks.map((f) => (
+                      <tr key={f._id}>
+                        <td>{f.name}</td>
+                        <td className="text-primary">{f.email}</td>
+                        <td>{f.feedback}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </div>

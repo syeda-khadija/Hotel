@@ -63,10 +63,10 @@ export default function ShowRooms() {
         image,
         is_available
       });
-  
+
       fetchRooms();
       toast.success(res.data.msg);
-  
+
       const modalElement = document.getElementById('roomModal');
       const modalInstance = Modal.getInstance(modalElement) || new Modal(modalElement);
       modalInstance.hide();
@@ -74,58 +74,66 @@ export default function ShowRooms() {
       toast.error(error.response?.data?.msg || "Update failed");
     }
   }
-  
+
   return (
-    <div className='container'>
+    <div>
       <Adminnavbar />
       <ToastContainer />
-      <h1>Room Data</h1>
-      <hr />
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
+        <div className="w-100 p-4" style={{ maxWidth: '1200px' }}>
+          
+          <hr />
 
-      {rooms.length === 0 ? (
-        <div className="alert alert-danger">No room data found.</div>
-      ) : (
-        <div className="table-responsive">
-          <table className="table table-bordered table-striped">
-            <thead className="table-dark">
-              <tr>
-                <th>Room Type</th>
-                <th>Description</th>
-                <th>Room Number</th>
-                <th>Beds</th>
-                <th>Price</th>
-                <th>Available</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rooms.map((room) => (
-                <tr key={room._id}>
-                  <td>{room.room_type}</td>
-                  <td>{room.description}</td>
-                  <td>{room.room_number}</td>
-                  <td>{room.no_of_bed}</td>
-                  <td>{room.price}</td>
-                  <td>{room.is_available ? "Yes" : "No"}</td>
-                  <td>
-                    <button className="btn btn-danger btn-sm me-2" onClick={() => remove(room._id)}>
-                      <i className="bi bi-trash3"></i> Delete
-                    </button>
-                    <button
-                      className="btn btn-success btn-sm"
-                      data-bs-toggle="modal"
-                      data-bs-target="#roomModal"
-                      onClick={() => loadRoomData(room)}
-                    >
-                      <i className="bi bi-pen"></i> Edit
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {rooms.length === 0 ? (
+            <div className="alert alert-danger text-center">No room data found.</div>
+          ) : (
+            <div className="container " style={{ marginLeft: '120px' }}>
+              <h1 className="text-center mb-4">Room Data</h1>
+            <div className="table-responsive " >
+              <table className="table table-bordered table-striped">
+                <thead className="table-dark">
+                  <tr>
+                    <th>Room Type</th>
+                    <th>Description</th>
+                    <th>Room Number</th>
+                    <th>Beds</th>
+                    <th>Price</th>
+                    <th>Available</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rooms.map((room) => (
+                    <tr key={room._id}>
+                      <td>{room.room_type}</td>
+                      <td>{room.description}</td>
+                      <td>{room.room_number}</td>
+                      <td>{room.no_of_bed}</td>
+                      <td>{room.price}</td>
+                      <td>{room.is_available ? "Yes" : "No"}</td>
+                      <td>
+                        <button className="btn btn-danger btn-sm me-2" onClick={() => remove(room._id)}>
+                          <i className="bi bi-trash3"></i> Delete
+                        </button>
+                        <button
+                          className="btn btn-success btn-sm"
+                          data-bs-toggle="modal"
+                          data-bs-target="#roomModal"
+                          onClick={() => loadRoomData(room)}
+                        >
+                          <i className="bi bi-pen"></i> Edit
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            </div>
+
+          )}
         </div>
-      )}
+      </div>
 
       {/* Modal */}
       <div className="modal fade" id="roomModal" tabIndex="-1" aria-labelledby="roomModalLabel" aria-hidden="true">
@@ -148,7 +156,7 @@ export default function ShowRooms() {
               <input type="number" className="form-control mt-2" placeholder="Price" value={price} onChange={(e) => setPrice(Number(e.target.value))} />
               <label>Image</label>
               <input type="text" className="form-control mt-2" placeholder="Image URL" value={image} onChange={(e) => setImage(e.target.value)} />
-              <label>Is_Avaliable</label>
+              <label>Is_Available</label>
               <select className="form-control mt-2" value={is_available} onChange={(e) => setAvailable(e.target.value === "true")}>
                 <option value="true">Available</option>
                 <option value="false">Not Available</option>

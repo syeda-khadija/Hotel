@@ -22,6 +22,8 @@ import Feedback from './Component/Feedback';
 import ShowFeedback from './ADMIN/Showfeedback';
 import AboutUsForm from './ADMIN/Aboutusform';
 import ShowAbout from './ADMIN/Showabout';
+import Adminnavbar from './ADMIN/Adminnavbar';
+import Adminlogin from './ADMIN/Adminlogin';
 
 function App() {
   
@@ -52,6 +54,9 @@ function App() {
 
 
         <Routes>
+           
+        <Route path='/admin' element={<Adminlogin/>} />
+        <Route path='/adminnav' element={<Adminnavbar/>} />
            
             <Route path='/s' element={<Showdata />} />
             <Route path='/hroom' element={<Hotelroom/>} />

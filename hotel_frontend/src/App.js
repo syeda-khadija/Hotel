@@ -24,6 +24,8 @@ import AboutUsForm from './ADMIN/Aboutusform';
 import ShowAbout from './ADMIN/Showabout';
 import Adminnavbar from './ADMIN/Adminnavbar';
 import Adminlogin from './ADMIN/Adminlogin';
+import Checkin from './WEB/Checkin';
+import Adminlogout from './ADMIN/Adminlogout';
 
 function App() {
   
@@ -45,6 +47,7 @@ function App() {
           <Route path='/book' element={<Booking/>} />
           <Route path='/footer' element={<Footer/>} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/checkin" element={<Checkin/>} />
 
 
 
@@ -67,6 +70,7 @@ function App() {
             <Route path='/sfeed' element={<ShowFeedback/>} />
             <Route path='/about' element={<AboutUsForm/>}/>
             <Route path='/sabout' element={<ShowAbout/>}/>
+            <Route path='/alogout' element={<Adminlogout/>}/>
 
           
         </Routes>

@@ -55,11 +55,9 @@ export default function Adminnavbar() {
           </span>
         </div>
 
-        {/* Login Button */}
-        <Link to="/login">
-          <button type="button" className="btn btn-danger btn-sm">
-            Logout
-          </button>
+        {/* Custom Logout Button */}
+        <Link to="/logout" className="btn btn-danger">
+          <i className="bi bi-box-arrow-right me-1"></i> Logout
         </Link>
       </div>
 

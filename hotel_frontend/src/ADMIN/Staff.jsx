@@ -121,10 +121,18 @@ export default function Staff() {
             <div className="col-md-6">
               <label className="form-label text-secondary">🎯 Role</label>
               <select className="form-select" value={staff_Role} onChange={(e) => setS_role(e.target.value)}>
-                <option value="">Select Role</option>
-                <option value="house keeping">House Keeping</option>
-                <option value="receptionist">Receptionist</option>
-                <option value="other">Other</option>
+              <option value="">Select Role</option>
+              <option value="housekeeping">Housekeeping</option>
+              <option value="receptionist">Receptionist</option>
+              <option value="concierge">Concierge</option>
+              <option value="bellboy">Bellboy / Porter</option>
+              <option value="waiter">Waiter</option>
+              <option value="waitress">Waitress</option>
+              <option value="chef">Chef / Cook</option>
+              <option value="maintenance">Maintenance Staff</option>
+              <option value="security">Security</option>
+              <option value="manager">Manager</option>
+              <option value="other">Other</option>
               </select>
             </div>
 

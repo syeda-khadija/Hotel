@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Booking() {
   const location = useLocation();
+  const navigate = useNavigate();
   const roomData = location.state?.room;
 
   const today = new Date();
@@ -19,18 +20,16 @@ export default function Booking() {
   const [noOfPerson, setNoOfPerson] = useState(1);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     const userString = localStorage.getItem("User_Data");
     if (userString) {
-      let data = JSON.parse(userString);
-      setUserId(data.i);
-      setUser(data.n)
-      console.log(userId)
+      const data = JSON.parse(userString);
+      setUserId(data.i || "");
+      setUserName(data.n || "");
     }
   }, []);
-
 
   const handleArrivalChange = (e) => {
     const newArrival = e.target.value;
@@ -56,7 +55,9 @@ export default function Booking() {
         departure,
         no_of_person: noOfPerson,
       });
+
       setMessage("🎉 Booking successful!");
+      setTimeout(() => navigate("/checkin"), 1500);
     } catch (err) {
       const msg = err.response?.data?.msg || "Something went wrong.";
       setError(`⚠️ ${msg}`);
@@ -67,12 +68,10 @@ export default function Booking() {
     <div
       className="container my-5"
       style={{
-        background:
-          "linear-gradient(135deg, #f8fafc 0%, #e1e5f2 100%)",
+        background: "linear-gradient(135deg, #f8fafc 0%, #e1e5f2 100%)",
         borderRadius: "12px",
         padding: "30px",
-        boxShadow:
-          "0 8px 30px rgba(0,0,0,0.12)",
+        boxShadow: "0 8px 30px rgba(0,0,0,0.12)",
       }}
     >
       <div className="row g-0 rounded overflow-hidden shadow-sm">
@@ -80,7 +79,7 @@ export default function Booking() {
         <aside
           className="col-lg-6 d-flex flex-column justify-content-center px-5"
           style={{
-            backgroundImage: `url("https://assets.minorhotels.com/image/upload/q_auto,f_auto,c_limit,w_1045/media/minor/anantara/images/anantara-jewel-bagh-jaipur-hotel/mhg/01_hotel-teaser/anantara_jewel-bagh_jaipur_hotel_teaser_01_880x620.jpg")`,
+            backgroundImage: `url("https://assets.minorhotels.com/image/upload/q_auto,f_auto,c_limit,w_1045/media/minor/anantara/images/anantara-jewel-bagh-jaipur-hotel/mhg/01_hotel-teaser/anantara_jewel_bagh_jaipur_hotel_teaser_01_880x620.jpg")`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             minHeight: "560px",
@@ -98,24 +97,15 @@ export default function Booking() {
               borderRadius: "12px 0 0 12px",
             }}
           />
-          <div
-            style={{
-              position: "relative",
-              zIndex: 2,
-              paddingTop: "40px",
-            }}
-          >
+          <div style={{ position: "relative", zIndex: 2, paddingTop: "40px" }}>
             <h2
               className="mb-4 fw-bold"
-              style={{ letterSpacing: "1.5px", fontSize: "2.3rem", color:"white"}}
+              style={{ letterSpacing: "1.5px", fontSize: "2.3rem", color: "white" }}
             >
               Room Details
             </h2>
             {roomData ? (
-              <ul
-                className="list-unstyled fs-5"
-                style={{ lineHeight: "2.4", fontWeight: "600" }}
-              >
+              <ul className="list-unstyled fs-5" style={{ lineHeight: "2.4", fontWeight: "600" }}>
                 <li>
                   <strong>Type:</strong> {roomData.room_type}
                 </li>
@@ -125,7 +115,7 @@ export default function Booking() {
                 <li>
                   <strong>Price:</strong>{" "}
                   <span style={{ color: "#ff6b6b", fontWeight: "700" }}>
-                    Pkr{roomData.price}
+                    Pkr {roomData.price}
                   </span>
                 </li>
                 <li>
@@ -151,7 +141,7 @@ export default function Booking() {
           </div>
         </aside>
 
-        {/* Right Panel - Booking Form */}
+        {/* Right Panel */}
         <section
           className="col-lg-6 bg-white p-5 d-flex flex-column justify-content-center"
           style={{ borderRadius: "0 12px 12px 0" }}
@@ -167,33 +157,22 @@ export default function Booking() {
             <i className="bi bi-calendar-check-fill me-2"></i>Book Your Stay
           </h3>
 
-          <form
-            onSubmit={handleSubmit}
-            noValidate
-            style={{ maxWidth: "450px", margin: "0 auto" }}
-          >
-            {[
-              {
-                label: "👤 User ID",
-                value: user,
-                readOnly: true,
-                type: "text",
-                id: "userId",
-              },
-              {
-                label: "🏠 Room ID",
-                value: roomId,
-                readOnly: true,
-                type: "text",
-                id: "roomId",
-              },
-            ].map(({ label, value, readOnly, type, id }) => (
+          <form onSubmit={handleSubmit} noValidate style={{ maxWidth: "450px", margin: "0 auto" }}>
+            {[{
+              label: "👤 User Name",
+              value: userName,
+              readOnly: true,
+              type: "text",
+              id: "userName",
+            }, {
+              label: "🏠 Room ID",
+              value: roomId,
+              readOnly: true,
+              type: "text",
+              id: "roomId",
+            }].map(({ label, value, readOnly, type, id }) => (
               <div className="mb-4" key={id}>
-                <label
-                  className="form-label text-secondary fw-semibold"
-                  htmlFor={id}
-                  style={{ fontSize: "1rem" }}
-                >
+                <label className="form-label text-secondary fw-semibold" htmlFor={id}>
                   {label}
                 </label>
                 <input
@@ -207,18 +186,13 @@ export default function Booking() {
                     border: "1.8px solid #ddd",
                     padding: "12px 14px",
                     fontSize: "1rem",
-                    transition: "border-color 0.3s ease",
                   }}
                 />
               </div>
             ))}
 
             <div className="mb-4">
-              <label
-                className="form-label text-secondary fw-semibold"
-                htmlFor="arrivalDate"
-                style={{ fontSize: "1rem" }}
-              >
+              <label className="form-label text-secondary fw-semibold" htmlFor="arrivalDate">
                 📅 Arrival Date
               </label>
               <input
@@ -234,22 +208,12 @@ export default function Booking() {
                   border: "1.8px solid #ddd",
                   padding: "12px 14px",
                   fontSize: "1rem",
-                  cursor: "pointer",
-                  transition: "border-color 0.3s ease",
                 }}
-                onFocus={(e) =>
-                  (e.currentTarget.style.borderColor = "#d32f2f")
-                }
-                onBlur={(e) => (e.currentTarget.style.borderColor = "#ddd")}
               />
             </div>
 
             <div className="mb-4">
-              <label
-                className="form-label text-secondary fw-semibold"
-                htmlFor="departureDate"
-                style={{ fontSize: "1rem" }}
-              >
+              <label className="form-label text-secondary fw-semibold" htmlFor="departureDate">
                 📆 Departure Date
               </label>
               <input
@@ -265,22 +229,12 @@ export default function Booking() {
                   border: "1.8px solid #ddd",
                   padding: "12px 14px",
                   fontSize: "1rem",
-                  cursor: "pointer",
-                  transition: "border-color 0.3s ease",
                 }}
-                onFocus={(e) =>
-                  (e.currentTarget.style.borderColor = "#d32f2f")
-                }
-                onBlur={(e) => (e.currentTarget.style.borderColor = "#ddd")}
               />
             </div>
 
             <div className="mb-5">
-              <label
-                className="form-label text-secondary fw-semibold"
-                htmlFor="noOfPerson"
-                style={{ fontSize: "1rem" }}
-              >
+              <label className="form-label text-secondary fw-semibold" htmlFor="noOfPerson">
                 🧍 No. of Persons
               </label>
               <input
@@ -289,19 +243,14 @@ export default function Booking() {
                 className="form-control"
                 value={noOfPerson}
                 min="1"
-                onChange={(e) => setNoOfPerson(e.target.value)}
+                onChange={(e) => setNoOfPerson(Number(e.target.value))}
                 required
                 style={{
                   borderRadius: "10px",
                   border: "1.8px solid #ddd",
                   padding: "12px 14px",
                   fontSize: "1rem",
-                  transition: "border-color 0.3s ease",
                 }}
-                onFocus={(e) =>
-                  (e.currentTarget.style.borderColor = "#d32f2f")
-                }
-                onBlur={(e) => (e.currentTarget.style.borderColor = "#ddd")}
               />
             </div>
 
@@ -309,25 +258,15 @@ export default function Booking() {
               type="submit"
               className="btn w-100 text-white fw-bold"
               style={{
-                background:
-                  "linear-gradient(90deg, #d32f2f 0%, #880e4f 100%)",
+                background: "linear-gradient(90deg, #d32f2f 0%, #880e4f 100%)",
                 padding: "15px",
                 fontSize: "1.2rem",
                 borderRadius: "12px",
                 border: "none",
                 boxShadow: "0 6px 18px rgba(211, 47, 47, 0.7)",
-                transition:
-                  "transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.07)";
-                e.currentTarget.style.boxShadow =
-                  "0 10px 25px rgba(211, 47, 47, 0.85)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow = "0 6px 18px rgba(211, 47, 47, 0.7)";
-              }}
+              disabled={!roomData?.is_available}
+              title={roomData?.is_available ? "Confirm Booking" : "Room Not Available"}
             >
               <i className="bi bi-check2-circle me-2"></i>Confirm Booking
             </button>
@@ -357,4 +296,3 @@ export default function Booking() {
     </div>
   );
 }
-

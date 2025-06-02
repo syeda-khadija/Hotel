@@ -54,5 +54,11 @@ router.put("/booking/update/:id", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+// Example Node.js Express route
+router.get("/booking/user/:id", async (req, res) => {
+  const bookings = await Booking.find({ User: req.params.id }).populate("room");
+  res.json(bookings);
+});
+
 
 module.exports = router;

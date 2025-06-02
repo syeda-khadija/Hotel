@@ -47,6 +47,9 @@ export default function Navbar() {
                     <li className="nav-item">
                       <Link className="nav-link" to="/feed">Feedback</Link>
                     </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/checkin">Check in</Link>
+                    </li>
 
                     {isLoggedIn ? (
                       <li className="nav-item">

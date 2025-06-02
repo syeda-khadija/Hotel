@@ -99,7 +99,7 @@ Login_work:async function(req,res){
     if(!getpassword){
         return res.status(404).json({msg:"password is incorrect"})
     }
-    let user_record = jwt.sign({id : find_user_email._id},process.env.JWT_KEY,{expiresIn:"2d"})
+    let user_record = jwt.sign({id : find_user_email._id},"Demo",{expiresIn:"2d"})
     return res.status(201).json({
         msg:"Login successfully",
         user_record,
@@ -118,18 +118,19 @@ Login_work:async function(req,res){
 
 forgot_pswd: async function(req,res){
     try {
-        let {email} =req.body
-        let email_check =await user.findOne({email})
+        console.log(process.env.PASSKEY)
+        let {user_email} =req.body
+        let email_check =await user.findOne({user_email})
 
         if(!email_check){
             res.status(404).json({msg:"Email doesn't Exist"})
         }
 
-        let random_set =jwt.sign({id:email_check.id},process.env.SECRET_KEY,{expiresIn:"10m"})
-        let link =`http://localhost:3007/Web/resetpswd/${random_set}`
+        let random_set =jwt.sign({id:email_check.id},"demo",{expiresIn:"10m"})
+        let link =`http://localhost:3000/reset/${random_set}`
 
         let Email_body={
-            to :email_check.email,
+            to :email_check.user_email,
             from :process.env.EMAIL,
             subject :"Reset your password",
             html :`hi ${email_check.name} <br/> your passwpord link is given below, kindly click on the given link ${link}`
@@ -144,7 +145,7 @@ forgot_pswd: async function(req,res){
             }
         })
     } catch (error) {
-        return res.status(501).json({msg:e.message})
+        return res.status(501).json({msg:error.message})
         
     }
 },
@@ -157,8 +158,8 @@ reset_password:async function (req,res){
             res.status(404).json({msg:"invalid Token"})
 
         }
-        let ecp=brcypt.hashSync(password,12);
-        await exibitor.findByIdAndUpdate(fetch.id,{password:ecp})
+        let ecp=bcrypt.hashSync(password,12);
+        await user.findByIdAndUpdate(fetch.id,{password:ecp})
         res.status(201).json({msg:"password Reset Successfully"})
         
     } catch (error) {

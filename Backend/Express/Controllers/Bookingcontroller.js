@@ -44,11 +44,14 @@ exports.createBooking = async (req, res) => {
 // Get all bookings
 exports.getAllBookings = async (req, res) => {
   try {
-    const bookings = await Booking.find();
-    res.status(200).json(bookings);
+    const bookings = await Booking.find()
+      .populate("User", "user_name")   // populate User field, only user_name
+      .populate("room", "room_type");  // populate room field, only room_name
+
+    res.json(bookings);
   } catch (error) {
-    console.error("Fetch bookings error:", error);
-    res.status(500).json({ error: "Failed to fetch bookings" });
+    console.error("Error fetching bookings:", error);
+    res.status(500).json({ message: "Server error fetching bookings" });
   }
 };
 
@@ -87,3 +90,19 @@ exports.updateBookingStatus = async (req, res) => {
   }
 };
 
+exports.getUserBookings =  async function (req, res) {
+      try {
+          const userId = req.params.user_id;
+
+          const bookings = await Booking.find({ User: userId });
+
+          if (bookings.length === 0) {
+              return res.status(404).json({ msg: "No bookings found for this user" });
+          }
+
+          return res.status(200).json(bookings);
+      } catch (error) {
+          return res.status(500).json({ msg: error.message });
+      }
+  }
+  

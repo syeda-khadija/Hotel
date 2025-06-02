@@ -26,6 +26,7 @@ import Adminnavbar from './ADMIN/Adminnavbar';
 import Adminlogin from './ADMIN/Adminlogin';
 import Checkin from './WEB/Checkin';
 import Adminlogout from './ADMIN/Adminlogout';
+import Checkout from './ADMIN/Checkout';
 
 function App() {
   
@@ -43,7 +44,7 @@ function App() {
           <Route path='reg' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/fp' element={<Forgotpassword />} />
-          <Route path='/reset' element={<Resetpassword />} />
+          <Route path='/reset/:token' element={<Resetpassword />} />
           <Route path='/book' element={<Booking/>} />
           <Route path='/footer' element={<Footer/>} />
           <Route path="/logout" element={<Logout />} />
@@ -71,6 +72,8 @@ function App() {
             <Route path='/about' element={<AboutUsForm/>}/>
             <Route path='/sabout' element={<ShowAbout/>}/>
             <Route path='/alogout' element={<Adminlogout/>}/>
+            <Route path='/checkout' element={<Checkout/>}/>
+
 
           
         </Routes>

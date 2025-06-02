@@ -30,7 +30,7 @@ app.use(cors());
 app.use("/Web/", r);
 app.use("/room/", room_route);
 app.use("/staff/",staff )
-app.use('/booking', bookingRoutes);
+app.use('/booking/', bookingRoutes);
 app.use('/', feedbackRoutes);
 app.use('/about/', aboutRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

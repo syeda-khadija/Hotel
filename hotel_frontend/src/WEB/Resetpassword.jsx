@@ -26,7 +26,7 @@ export default function Resetpassword() {
       toast.success(response.data.msg || "Password reset successful");
       setPswd("");
       setCpswd("");
-      nav("/log_exb");
+      nav("/login");
     } catch (error) {
       const errorMsg = error.response?.data?.msg || "Something went wrong";
       toast.error(errorMsg);

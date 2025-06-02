@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
-  const isLoggedIn = localStorage.getItem("User_Data");
+  const isLoggedIn = localStorage.getItem("guest");
 
   return (
     <div>
@@ -47,9 +47,12 @@ export default function Navbar() {
                     <li className="nav-item">
                       <Link className="nav-link" to="/feed">Feedback</Link>
                     </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/checkin">Check in</Link>
-                    </li>
+                    {/* Check in tab sirf tab show hoga jab user logged in hoga */}
+                    {isLoggedIn && (
+                      <li className="nav-item">
+                        <Link className="nav-link" to="/checkin">Check in</Link>
+                      </li>
+                    )}
 
                     {isLoggedIn ? (
                       <li className="nav-item">

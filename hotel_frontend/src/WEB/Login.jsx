@@ -22,7 +22,7 @@ export default function Login() {
       });
 
       toast.success(res.data.msg);
-      localStorage.setItem("User_Data", JSON.stringify(res.data.user));
+      localStorage.setItem("guest", JSON.stringify(res.data.user));
       setEmail('');
       setPass('');
       setTimeout(() => nav("/"), 1000);

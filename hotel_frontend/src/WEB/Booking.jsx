@@ -23,7 +23,7 @@ export default function Booking() {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    const userString = localStorage.getItem("User_Data");
+    const userString = localStorage.getItem("guest");
     if (userString) {
       const data = JSON.parse(userString);
       setUserId(data.i || "");

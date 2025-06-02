@@ -26,6 +26,10 @@ let booking = mongoose.Schema({
   created_at: {
     type: Date,
     default: Date.now
+  },status:{
+    type:String,
+    default:"pending"
+    
   }
 });
 

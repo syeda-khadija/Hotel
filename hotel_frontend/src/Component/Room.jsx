@@ -12,7 +12,7 @@ export default function Room() {
     fetchRooms();
 
     // 🔐 Check login status
-    const storedUser = JSON.parse(localStorage.getItem('User_Data'));
+    const storedUser = JSON.parse(localStorage.getItem('guest'));
     if (storedUser && storedUser.i) {
       setIsLoggedIn(true);
     }

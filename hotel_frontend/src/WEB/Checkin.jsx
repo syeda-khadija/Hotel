@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "../Component/Navbar";
+import Footer from "../WEB/Footer";
 
 export default function CheckIn() {
   const [bookings, setBookings] = useState([]);
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("User"));
+    const userData = JSON.parse(localStorage.getItem("guest"));
     if (userData?.i) {
+      console.log(userData)
       setUserId(userData.i);
       fetchBookings(userData.i);
     }
@@ -23,8 +26,10 @@ export default function CheckIn() {
   };
 
   return (
+    <div >
+      <Navbar/>
     <div className="container my-5">
-      <h2 className="text-center mb-4 fw-bold text-danger">
+      <h2 className="text-center mb-4 fw-bold ">
         <i className="bi bi-door-open-fill me-2"></i>Your Check-In Details
       </h2>
 
@@ -83,5 +88,6 @@ export default function CheckIn() {
         </div>
       )}
     </div>
+  <Footer/></div>
   );
 }

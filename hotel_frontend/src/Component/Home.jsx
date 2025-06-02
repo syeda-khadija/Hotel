@@ -44,7 +44,7 @@ export default function Home() {
   <h6 className="fade text-white">Luxurious Rooms</h6>
     <div class="col-md-12">
     <Link className="nav-link" //   activeClassName="active_class"
-      to="/book"><button type="button" className="book_btn"> Book Now</button>
+      to=""><button type="button" className="book_btn"> Book Now</button>
        </Link></div>
   </div>
 </div>

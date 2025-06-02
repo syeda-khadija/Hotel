@@ -9,7 +9,7 @@ export default function Forgotpassword() {
   async function fp() {
     try {
       const res = await axios.post(`http://localhost:3007/Web/forgot`, {
-        email: email,
+        user_email: email,
       });
       toast.success(res.data.msg);
     } catch (error) {

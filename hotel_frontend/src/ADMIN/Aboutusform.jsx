@@ -56,15 +56,14 @@ export default function AboutUs() {
     <div>
       <Adminnavbar />
       <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ minHeight: '100vh', background: '#f8f9fa' }}
+        className="container-fluid d-flex justify-content-center align-items-center"
+        style={{ minHeight: '100vh', background: '#f8f9fa', padding: '20px' }}
       >
         <div
-          className="card border-0 shadow-lg p-4"
+          className="card border-0 shadow-lg p-4 w-100"
           style={{
-            width: '100%',
             maxWidth: '900px',
-            background: 'rgba(255, 255, 255, 0.85)',
+            background: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(10px)',
             borderRadius: '15px',
           }}
